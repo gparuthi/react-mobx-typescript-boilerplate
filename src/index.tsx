@@ -4,13 +4,14 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { Layout, Menu, Breadcrumb, Button, Input } from 'antd';
-import 'antd/dist/antd.css'; 
+import { Button, Intent, Spinner, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Alignment } from "@blueprintjs/core";
+import { Colors, Text, Classes } from "@blueprintjs/core"
 import './index.css';
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+
 import { Motion, spring } from 'react-motion';
 import FlipMove from 'react-flip-move';
-
-const { Header, Content, Footer } = Layout;
 
 class ContentModel {
   @observable text: string
@@ -60,34 +61,23 @@ export class App extends React.Component<Props>{
       store.currentContent.text = event.currentTarget.value
     }
     return (
-      <Layout className="layout">
-        <Header>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            style={{ lineHeight: '64px' }}
-          >
-            <Menu.Item key="1">nav 1</Menu.Item>
-            <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <div style={{ background: '#fff', padding: 10, minHeight: 280 }}>
-            <ContentView store={store}></ContentView>
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          <Input value={store.currentContent.text} onChange={handleChange} />
-    </Footer>
-      </Layout>
+      <div className={Classes.DARK} style={{backgroundColor: Colors.DARK_GRAY3, minHeight: '1500px'}}>
+        <Navbar>
+          <NavbarGroup align={Alignment.RIGHT}>
+            <NavbarHeading>Blueprint</NavbarHeading>
+            <NavbarDivider />
+            <Button className="pt-minimal" icon="home" text="Home" />
+            <Button className="pt-minimal" icon="document" text="Files" />
+          </NavbarGroup>
+        </Navbar>
+        <div className='content'>
+          <Text>Hello World!</Text>
+          <ContentView store={store}></ContentView>
+          <input className={Classes.INPUT} value={store.currentContent.text} onChange={handleChange} />
+    </div>
+      
+        
+      </div>
     )
   }
 }
