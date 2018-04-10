@@ -4,7 +4,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { Button, Intent, Spinner, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Alignment } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Alignment, Card, Elevation } from "@blueprintjs/core";
 import { Colors, Text, Classes } from "@blueprintjs/core"
 import './index.css';
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -70,9 +70,13 @@ export class App extends React.Component<Props>{
             <Button className="pt-minimal" icon="document" text="Files" />
           </NavbarGroup>
         </Navbar>
-        <div className='content'>
-          <Text>Hello World!</Text>
-          <ContentView store={store}></ContentView>
+        <div className=''>
+          <Card interactive={false} elevation={Elevation.FOUR}>
+            <h5><a href="#">Hello World!</a></h5>
+            <p>Card content</p>
+            <ContentView store={store}></ContentView>
+            <Button>Submit</Button>
+          </Card>
           <input className={Classes.INPUT} value={store.currentContent.text} onChange={handleChange} />
     </div>
       
