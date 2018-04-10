@@ -4,7 +4,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
-import { Button, Intent, Spinner, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Alignment, Card, Elevation } from "@blueprintjs/core";
+import { Button, Intent, Spinner, Navbar, NavbarGroup, NavbarHeading, NavbarDivider, Alignment, Card, Elevation, NonIdealState, Icon } from "@blueprintjs/core";
 import { Colors, Text, Classes } from "@blueprintjs/core"
 import './index.css';
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -61,21 +61,31 @@ export class App extends React.Component<Props>{
       store.currentContent.text = event.currentTarget.value
     }
     return (
-      <div className={Classes.DARK} style={{backgroundColor: Colors.DARK_GRAY3, minHeight: '1500px'}}>
+      <div className={Classes.DARK} style={{minHeight: '1500px'}}>
         <Navbar>
           <NavbarGroup align={Alignment.RIGHT}>
-            <NavbarHeading>Blueprint</NavbarHeading>
+            <NavbarHeading>Test App</NavbarHeading>
             <NavbarDivider />
             <Button className="pt-minimal" icon="home" text="Home" />
             <Button className="pt-minimal" icon="document" text="Files" />
           </NavbarGroup>
         </Navbar>
-        <div className=''>
+        <div className='content'>
           <Card interactive={false} elevation={Elevation.FOUR}>
             <h5><a href="#">Hello World!</a></h5>
             <p>Card content</p>
             <ContentView store={store}></ContentView>
             <Button>Submit</Button>
+          </Card>
+          
+          <Card interactive={false} elevation={Elevation.ONE}>
+            <NonIdealState>
+              <div className={Classes.NON_IDEAL_STATE_VISUAL + ' ' + Classes.NON_IDEAL_STATE_ICON}>
+                <span className={Classes.iconClass('folder-open') + ' ' + Classes.ICON}></span>
+              </div>
+              <h4 className={Classes.NON_IDEAL_STATE_TITLE}>This is empty</h4>
+              <div className={Classes.NON_IDEAL_STATE_DESCRIPTION}>Add something here</div>
+            </NonIdealState>
           </Card>
           <input className={Classes.INPUT} value={store.currentContent.text} onChange={handleChange} />
     </div>
